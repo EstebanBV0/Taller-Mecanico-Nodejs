@@ -20,6 +20,7 @@ export class Vehi extends Entity {
     },
   })
   Placa: string;
+
   @property({
     type: 'string',
     required: true,

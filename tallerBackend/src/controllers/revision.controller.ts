@@ -37,12 +37,12 @@ export class RevisionController {
         'application/json': {
           schema: getModelSchemaRef(Revisiones, {
             title: 'NewRevisiones',
-            exclude: ['id'],
+            exclude: ['idrevision'],
           }),
         },
       },
     })
-    revisiones: Omit<Revisiones, 'id'>,
+    revisiones: Omit<Revisiones, 'idrevision'>,
   ): Promise<Revisiones> {
     return this.revisionesRepository.create(revisiones);
   }

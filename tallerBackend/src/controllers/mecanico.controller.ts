@@ -37,7 +37,6 @@ export class MecanicoController {
         'application/json': {
           schema: getModelSchemaRef(Mecanico, {
             title: 'NewMecanico',
-            exclude: ['id'],
           }),
         },
       },

@@ -1,15 +1,15 @@
-import {Entity, model, property, hasMany} from '@loopback/repository';
-import {SolicitudRevision} from './solicitud-revision.model';
+import {Entity, hasMany, model, property} from '@loopback/repository';
 import {Revisiones} from './revisiones.model';
+import {SolicitudRevision} from './solicitud-revision.model';
 
 @model()
 export class Mecanico extends Entity   {
   @property({
     type: 'string',
     id: true,
-    generated: true,
+    generated: false,
   })
-  id?: string;
+  id: string;
 
   @property({
     type: 'string',
