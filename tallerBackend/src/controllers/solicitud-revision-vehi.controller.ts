@@ -16,20 +16,20 @@ import {
   requestBody,
 } from '@loopback/rest';
 import {
-  Propietario,
+  SolicitudRevision,
   Vehi,
 } from '../models';
-import {PropietarioRepository} from '../repositories';
+import {SolicitudRevisionRepository} from '../repositories';
 
-export class PropietarioVehiController {
+export class SolicitudRevisionVehiController {
   constructor(
-    @repository(PropietarioRepository) protected propietarioRepository: PropietarioRepository,
+    @repository(SolicitudRevisionRepository) protected solicitudRevisionRepository: SolicitudRevisionRepository,
   ) { }
 
-  @get('/propietarios/{id}/vehi', {
+  @get('/solicitud-revisions/{id}/vehi', {
     responses: {
       '200': {
-        description: 'Propietario has one Vehi',
+        description: 'SolicitudRevision has one Vehi',
         content: {
           'application/json': {
             schema: getModelSchemaRef(Vehi),
@@ -42,38 +42,38 @@ export class PropietarioVehiController {
     @param.path.string('id') id: string,
     @param.query.object('filter') filter?: Filter<Vehi>,
   ): Promise<Vehi> {
-    return this.propietarioRepository.vehi(id).get(filter);
+    return this.solicitudRevisionRepository.vehi(id).get(filter);
   }
 
-  @post('/propietarios/{id}/vehi', {
+  @post('/solicitud-revisions/{id}/vehi', {
     responses: {
       '200': {
-        description: 'Propietario model instance',
+        description: 'SolicitudRevision model instance',
         content: {'application/json': {schema: getModelSchemaRef(Vehi)}},
       },
     },
   })
   async create(
-    @param.path.string('id') id: typeof Propietario.prototype.id,
+    @param.path.string('id') id: typeof SolicitudRevision.prototype.IdRevision,
     @requestBody({
       content: {
         'application/json': {
           schema: getModelSchemaRef(Vehi, {
-            title: 'NewVehiInPropietario',
+            title: 'NewVehiInSolicitudRevision',
             exclude: ['Placa'],
-            optional: ['propietarioId']
+            optional: ['solicitudRevisionId']
           }),
         },
       },
     }) vehi: Omit<Vehi, 'Placa'>,
   ): Promise<Vehi> {
-    return this.propietarioRepository.vehi(id).create(vehi);
+    return this.solicitudRevisionRepository.vehi(id).create(vehi);
   }
 
-  @patch('/propietarios/{id}/vehi', {
+  @patch('/solicitud-revisions/{id}/vehi', {
     responses: {
       '200': {
-        description: 'Propietario.Vehi PATCH success count',
+        description: 'SolicitudRevision.Vehi PATCH success count',
         content: {'application/json': {schema: CountSchema}},
       },
     },
@@ -90,13 +90,13 @@ export class PropietarioVehiController {
     vehi: Partial<Vehi>,
     @param.query.object('where', getWhereSchemaFor(Vehi)) where?: Where<Vehi>,
   ): Promise<Count> {
-    return this.propietarioRepository.vehi(id).patch(vehi, where);
+    return this.solicitudRevisionRepository.vehi(id).patch(vehi, where);
   }
 
-  @del('/propietarios/{id}/vehi', {
+  @del('/solicitud-revisions/{id}/vehi', {
     responses: {
       '200': {
-        description: 'Propietario.Vehi DELETE success count',
+        description: 'SolicitudRevision.Vehi DELETE success count',
         content: {'application/json': {schema: CountSchema}},
       },
     },
@@ -105,6 +105,6 @@ export class PropietarioVehiController {
     @param.path.string('id') id: string,
     @param.query.object('where', getWhereSchemaFor(Vehi)) where?: Where<Vehi>,
   ): Promise<Count> {
-    return this.propietarioRepository.vehi(id).delete(where);
+    return this.solicitudRevisionRepository.vehi(id).delete(where);
   }
 }

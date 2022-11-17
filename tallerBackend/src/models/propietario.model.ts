@@ -1,14 +1,22 @@
-import {Entity, hasOne, model, property} from '@loopback/repository';
-import {Vehi} from './vehi.model';
+import {Entity,  model, property} from '@loopback/repository';
 
 @model()
 export class Propietario extends Entity {
   @property({
-    type: 'string',
+    type: 'number',
     id: true,
-    generated: true,
+    generated: false,
+    required: true,
+    jsonSchema: {
+      maxLength: 10,
+      minLength: 10,
+      errorMessage: 'La cedula debe ser de 10 digitos',
+      pattern: "[0-9]"
+
+    },
+
   })
-  id?: string;
+  Cedula?: number;
 
   @property({
     type: 'string',
@@ -74,12 +82,7 @@ export class Propietario extends Entity {
   })
   Correo: string;
 
-  @hasOne(() => Vehi)
-  vehi: Vehi;
 
-  constructor(data?: Partial<Propietario>) {
-    super(data);
-  }
 }
 
 export interface PropietarioRelations {

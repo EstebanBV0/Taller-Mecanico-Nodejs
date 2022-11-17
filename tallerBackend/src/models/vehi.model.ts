@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {Revisiones} from './revisiones.model';
+import {CambioRepuesto} from './cambio-repuesto.model';
+
 @model()
 export class Vehi extends Entity {
   @property({
@@ -57,7 +60,7 @@ export class Vehi extends Entity {
 
   @property({
     type: 'string',
-    required: true,
+    required: false,
     jsonSchema: {
       maxLength: 15,
       minLength: 5,
@@ -72,6 +75,17 @@ export class Vehi extends Entity {
     unique: true,
   })
   propietarioId: string;
+
+  @hasMany(() => Revisiones)
+  revisiones: Revisiones[];
+
+  @property({
+    type: 'string',
+  })
+  solicitudRevisionId?: string;
+
+  @hasMany(() => CambioRepuesto)
+  cambioRepuestos: CambioRepuesto[];
 
   constructor(data?: Partial<Vehi>) {
     super(data);

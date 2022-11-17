@@ -1,4 +1,6 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
+import {SolicitudRevision} from './solicitud-revision.model';
+import {Revisiones} from './revisiones.model';
 
 @model()
 export class Mecanico extends Entity   {
@@ -80,6 +82,11 @@ export class Mecanico extends Entity   {
   })
   Correo: string;
 
+  @hasMany(() => SolicitudRevision)
+  solicitudRevisions: SolicitudRevision[];
+
+  @hasMany(() => Revisiones)
+  revisiones: Revisiones[];
 
   constructor(data?: Partial<Mecanico>) {
     super(data);
