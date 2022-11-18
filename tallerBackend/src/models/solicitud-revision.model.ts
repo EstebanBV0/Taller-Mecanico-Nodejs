@@ -7,7 +7,7 @@ export class SolicitudRevision extends Entity {
   @property({
     type: 'string',
     id: true,
-    generated: true,
+    generated: false,
   })
   IdRevision?: string;
 

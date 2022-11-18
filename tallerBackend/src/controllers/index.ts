@@ -12,3 +12,4 @@ export * from './mecanico-solicitud-revision.controller';
 export * from './vehi-cambio-repuesto.controller';
 export * from './mecanico-revisiones.controller';
 export * from './revision.controller';
+export * from './solicitudrev.controller';
